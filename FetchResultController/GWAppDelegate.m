@@ -8,12 +8,11 @@
 
 #import <CoreData/CoreData.h>
 #import "GWAppDelegate.h"
-#import "GWViewController.h"
+#import "GWRecordsController.h"
 
 @interface GWAppDelegate ()
 
 @property (nonatomic, strong, readonly) NSManagedObjectModel *managedObjectModel;
-@property (nonatomic, strong, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 @end
@@ -22,13 +21,6 @@
 
 @synthesize managedObjectModel=_managedObjectModel, managedObjectContext=_managedObjectContext, persistentStoreCoordinator=_persistentStoreCoordinator;
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-    GWViewController *rootViewController = (GWViewController *)[[navigationController viewControllers] objectAtIndex:0];
-    rootViewController.managedObjectContext = self.managedObjectContext;
-    return YES;
-}
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {

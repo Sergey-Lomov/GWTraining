@@ -14,7 +14,7 @@
 		43DAE5C9192109E800F54D72 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DAE5C8192109E800F54D72 /* main.m */; };
 		43DAE5CD192109E800F54D72 /* GWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DAE5CC192109E800F54D72 /* GWAppDelegate.m */; };
 		43DAE5D0192109E800F54D72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43DAE5CE192109E800F54D72 /* Main.storyboard */; };
-		43DAE5D3192109E800F54D72 /* GWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DAE5D2192109E800F54D72 /* GWViewController.m */; };
+		43DAE5D3192109E800F54D72 /* GWRecordsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DAE5D2192109E800F54D72 /* GWRecordsController.m */; };
 		43DAE5D5192109E800F54D72 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43DAE5D4192109E800F54D72 /* Images.xcassets */; };
 		43DAE5DC192109E800F54D72 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43DAE5DB192109E800F54D72 /* XCTest.framework */; };
 		43DAE5DD192109E800F54D72 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43DAE5BC192109E800F54D72 /* Foundation.framework */; };
@@ -23,8 +23,9 @@
 		43DAE5E8192109E800F54D72 /* FetchResultControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DAE5E7192109E800F54D72 /* FetchResultControllerTests.m */; };
 		43DAE5F219210BA600F54D72 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43DAE5F119210BA600F54D72 /* CoreData.framework */; };
 		43DAE5F519210D3B00F54D72 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 43DAE5F319210D3B00F54D72 /* Model.xcdatamodeld */; };
-		43DAE5F819210DEE00F54D72 /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DAE5F719210DEE00F54D72 /* Record.m */; };
-		43DAE5FB19211E6000F54D72 /* GWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DAE5FA19211E6000F54D72 /* GWTableViewCell.m */; };
+		43DAE5FE19212CA600F54D72 /* GWSubRecordsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DAE5FD19212CA600F54D72 /* GWSubRecordsController.m */; };
+		43DAE60719212DD200F54D72 /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DAE60619212DD200F54D72 /* Record.m */; };
+		43DAE60E192139F700F54D72 /* SubRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DAE60D192139F700F54D72 /* SubRecord.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,8 +50,8 @@
 		43DAE5CB192109E800F54D72 /* GWAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GWAppDelegate.h; sourceTree = "<group>"; };
 		43DAE5CC192109E800F54D72 /* GWAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GWAppDelegate.m; sourceTree = "<group>"; };
 		43DAE5CF192109E800F54D72 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		43DAE5D1192109E800F54D72 /* GWViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GWViewController.h; sourceTree = "<group>"; };
-		43DAE5D2192109E800F54D72 /* GWViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GWViewController.m; sourceTree = "<group>"; };
+		43DAE5D1192109E800F54D72 /* GWRecordsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GWRecordsController.h; sourceTree = "<group>"; };
+		43DAE5D2192109E800F54D72 /* GWRecordsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GWRecordsController.m; sourceTree = "<group>"; };
 		43DAE5D4192109E800F54D72 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		43DAE5DA192109E800F54D72 /* FetchResultControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FetchResultControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		43DAE5DB192109E800F54D72 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -59,10 +60,12 @@
 		43DAE5E7192109E800F54D72 /* FetchResultControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FetchResultControllerTests.m; sourceTree = "<group>"; };
 		43DAE5F119210BA600F54D72 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		43DAE5F419210D3B00F54D72 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		43DAE5F619210DEE00F54D72 /* Record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Record.h; sourceTree = "<group>"; };
-		43DAE5F719210DEE00F54D72 /* Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Record.m; sourceTree = "<group>"; };
-		43DAE5F919211E6000F54D72 /* GWTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWTableViewCell.h; sourceTree = "<group>"; };
-		43DAE5FA19211E6000F54D72 /* GWTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWTableViewCell.m; sourceTree = "<group>"; };
+		43DAE5FC19212CA600F54D72 /* GWSubRecordsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWSubRecordsController.h; sourceTree = "<group>"; };
+		43DAE5FD19212CA600F54D72 /* GWSubRecordsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWSubRecordsController.m; sourceTree = "<group>"; };
+		43DAE60519212DD200F54D72 /* Record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Record.h; sourceTree = "<group>"; };
+		43DAE60619212DD200F54D72 /* Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Record.m; sourceTree = "<group>"; };
+		43DAE60C192139F700F54D72 /* SubRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubRecord.h; sourceTree = "<group>"; };
+		43DAE60D192139F700F54D72 /* SubRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubRecord.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,18 +127,16 @@
 		43DAE5C2192109E800F54D72 /* FetchResultController */ = {
 			isa = PBXGroup;
 			children = (
+				43DAE608192131CB00F54D72 /* DataModel */,
 				43DAE5CB192109E800F54D72 /* GWAppDelegate.h */,
 				43DAE5CC192109E800F54D72 /* GWAppDelegate.m */,
 				43DAE5CE192109E800F54D72 /* Main.storyboard */,
-				43DAE5D1192109E800F54D72 /* GWViewController.h */,
-				43DAE5D2192109E800F54D72 /* GWViewController.m */,
+				43DAE5D1192109E800F54D72 /* GWRecordsController.h */,
+				43DAE5D2192109E800F54D72 /* GWRecordsController.m */,
+				43DAE5FC19212CA600F54D72 /* GWSubRecordsController.h */,
+				43DAE5FD19212CA600F54D72 /* GWSubRecordsController.m */,
 				43DAE5D4192109E800F54D72 /* Images.xcassets */,
 				43DAE5C3192109E800F54D72 /* Supporting Files */,
-				43DAE5F319210D3B00F54D72 /* Model.xcdatamodeld */,
-				43DAE5F619210DEE00F54D72 /* Record.h */,
-				43DAE5F719210DEE00F54D72 /* Record.m */,
-				43DAE5F919211E6000F54D72 /* GWTableViewCell.h */,
-				43DAE5FA19211E6000F54D72 /* GWTableViewCell.m */,
 			);
 			path = FetchResultController;
 			sourceTree = "<group>";
@@ -167,6 +168,18 @@
 				43DAE5E4192109E800F54D72 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		43DAE608192131CB00F54D72 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				43DAE5F319210D3B00F54D72 /* Model.xcdatamodeld */,
+				43DAE60C192139F700F54D72 /* SubRecord.h */,
+				43DAE60D192139F700F54D72 /* SubRecord.m */,
+				43DAE60519212DD200F54D72 /* Record.h */,
+				43DAE60619212DD200F54D72 /* Record.m */,
+			);
+			name = DataModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,12 +279,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43DAE5F819210DEE00F54D72 /* Record.m in Sources */,
-				43DAE5FB19211E6000F54D72 /* GWTableViewCell.m in Sources */,
 				43DAE5CD192109E800F54D72 /* GWAppDelegate.m in Sources */,
-				43DAE5D3192109E800F54D72 /* GWViewController.m in Sources */,
+				43DAE60719212DD200F54D72 /* Record.m in Sources */,
+				43DAE5D3192109E800F54D72 /* GWRecordsController.m in Sources */,
+				43DAE5FE19212CA600F54D72 /* GWSubRecordsController.m in Sources */,
 				43DAE5C9192109E800F54D72 /* main.m in Sources */,
 				43DAE5F519210D3B00F54D72 /* Model.xcdatamodeld in Sources */,
+				43DAE60E192139F700F54D72 /* SubRecord.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

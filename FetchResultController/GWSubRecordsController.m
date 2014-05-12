@@ -1,41 +1,45 @@
 //
-//  GWViewController.m
+//  GWSubRecordsController.m
 //  FetchResultController
 //
 //  Created by Sergii Lomov on 12/05/14.
 //
 //
 
-#import "GWViewController.h"
+#import "GWAppDelegate.h"
+#import "GWSubRecordsController.h"
 #import "Record.h"
-#import "GWTableViewCell.h"
+#import "SubRecord.h"
 
-@interface GWViewController ()
+@interface GWSubRecordsController ()
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
 @end
 
-@implementation GWViewController
+@implementation GWSubRecordsController
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
-    // Set up the edit and add buttons.
-//    UIBarButtonItem *newRecordButton = [[UIBarButtonItem alloc] initWithTitle: @"+"
-//                                                                        style:UIBarButtonItemStylePlain
-//                                                                       target:self
-//                                                                       action:@selector(presentNewRecordAlert)];
-//    self.navigationItem.rightBarButtonItem = newRecordButton;
-    
-    self.tableView.dataSource = self;
     
     NSError *error;
     if (![[self fetchedResultsController] performFetch:&error]) {
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
+}
+
+- (void)dealloc
+{
+    self.fetchedResultsController.delegate = nil;
+    self.fetchedResultsController = nil;
+}
+
+- (void)setRecord:(Record *)record
+{
+    _record = record;
+    self.title = record.title;
 }
 
 #pragma mark UITableViewDataSource protocol methods
@@ -48,26 +52,29 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"Cell";
-    GWTableViewCell *cell = (GWTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-
+    static NSString *cellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    
     if (cell == nil)
     {
-        cell = [GWTableViewCell new];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+                                      reuseIdentifier:cellIdentifier];
+        cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
 
-- (void)configureCell:(GWTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    Record *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.titleLabel.text = record.title;
+    SubRecord *subRecord = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.textLabel.text = subRecord.title;
     
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     [dateFormatter setDateFormat: @"yyyy-MM-dd"];
-    cell.dateLabel.text = [dateFormatter stringFromDate:record.creationDate];
+    cell.detailTextLabel.text = [dateFormatter stringFromDate:subRecord.creationDate];
 }
 
 #pragma mark NSFetchedResultsController methods
@@ -78,17 +85,20 @@
         return _fetchedResultsController;
     }
     
+    NSManagedObjectContext *managedObjectContext = ((GWAppDelegate *)[UIApplication sharedApplication].delegate).managedObjectContext;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Record"
-                                              inManagedObjectContext:self.managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"SubRecord"
+                                              inManagedObjectContext:managedObjectContext];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"parent = %@", self.record];
     [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:predicate];
     
     NSSortDescriptor *dateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:NO];
     NSArray *sortDescriptors = @[dateDescriptor];
     [fetchRequest setSortDescriptors:sortDescriptors];
     
     _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-                                                                    managedObjectContext:self.managedObjectContext
+                                                                    managedObjectContext:managedObjectContext
                                                                       sectionNameKeyPath:nil
                                                                                cacheName:nil];
     _fetchedResultsController.delegate = self;
@@ -116,7 +126,7 @@
             break;
             
         case NSFetchedResultsChangeUpdate:
-            [self configureCell:(GWTableViewCell *)[tableView cellForRowAtIndexPath:indexPath]
+            [self configureCell:[tableView cellForRowAtIndexPath:indexPath]
                     atIndexPath:indexPath];
             break;
             
@@ -134,7 +144,7 @@
 
 #pragma mark UIAlertView methods
 
-- (IBAction)addNewRecord:(id)sender {
+- (IBAction)addNewSubRecord:(id)sender {
     
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Add record"
                                                    message:nil
@@ -149,18 +159,21 @@
     
     if (buttonIndex == 1) {
         
-        Record *record = [NSEntityDescription insertNewObjectForEntityForName:@"Record"
-                                                       inManagedObjectContext:self.managedObjectContext];
-        record.title = [alertView textFieldAtIndex:0].text;
-        record.creationDate = [NSDate date];
+        NSManagedObjectContext *managedObjectContext = ((GWAppDelegate *)[UIApplication sharedApplication].delegate).managedObjectContext;
+        SubRecord *subRecord = [NSEntityDescription insertNewObjectForEntityForName:@"SubRecord"
+                                                       inManagedObjectContext:managedObjectContext];
+        subRecord.title = [alertView textFieldAtIndex:0].text;
+        subRecord.creationDate = [NSDate date];
+        
+        [self.record addChildsObject:subRecord];
+        subRecord.parent = self.record;
         
         NSError *error = nil;
-        [self.managedObjectContext save:&error];
+        [managedObjectContext save:&error];
         if (error) {
             
             NSLog(@"Error at new record saving");
         }
     }
 }
-
 @end

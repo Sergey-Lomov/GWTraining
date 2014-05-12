@@ -11,5 +11,6 @@
 @interface GWAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, strong, readonly) NSManagedObjectContext *managedObjectContext;
 
 @end

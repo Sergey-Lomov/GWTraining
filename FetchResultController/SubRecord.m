@@ -1,19 +1,19 @@
 //
-//  Record.m
+//  SubRecord.m
 //  FetchResultController
 //
 //  Created by Sergii Lomov on 12/05/14.
 //
 //
 
-#import "Record.h"
 #import "SubRecord.h"
+#import "Record.h"
 
 
-@implementation Record
+@implementation SubRecord
 
 @dynamic title;
 @dynamic creationDate;
-@dynamic childs;
+@dynamic parent;
 
 @end
