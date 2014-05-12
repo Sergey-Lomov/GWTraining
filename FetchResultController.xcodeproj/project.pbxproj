@@ -21,6 +21,10 @@
 		43DAE5DE192109E800F54D72 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43DAE5C0192109E800F54D72 /* UIKit.framework */; };
 		43DAE5E6192109E800F54D72 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43DAE5E4192109E800F54D72 /* InfoPlist.strings */; };
 		43DAE5E8192109E800F54D72 /* FetchResultControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DAE5E7192109E800F54D72 /* FetchResultControllerTests.m */; };
+		43DAE5F219210BA600F54D72 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43DAE5F119210BA600F54D72 /* CoreData.framework */; };
+		43DAE5F519210D3B00F54D72 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 43DAE5F319210D3B00F54D72 /* Model.xcdatamodeld */; };
+		43DAE5F819210DEE00F54D72 /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DAE5F719210DEE00F54D72 /* Record.m */; };
+		43DAE5FB19211E6000F54D72 /* GWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DAE5FA19211E6000F54D72 /* GWTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,12 @@
 		43DAE5E3192109E800F54D72 /* FetchResultControllerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FetchResultControllerTests-Info.plist"; sourceTree = "<group>"; };
 		43DAE5E5192109E800F54D72 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		43DAE5E7192109E800F54D72 /* FetchResultControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FetchResultControllerTests.m; sourceTree = "<group>"; };
+		43DAE5F119210BA600F54D72 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		43DAE5F419210D3B00F54D72 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		43DAE5F619210DEE00F54D72 /* Record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Record.h; sourceTree = "<group>"; };
+		43DAE5F719210DEE00F54D72 /* Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Record.m; sourceTree = "<group>"; };
+		43DAE5F919211E6000F54D72 /* GWTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWTableViewCell.h; sourceTree = "<group>"; };
+		43DAE5FA19211E6000F54D72 /* GWTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43DAE5F219210BA600F54D72 /* CoreData.framework in Frameworks */,
 				43DAE5BF192109E800F54D72 /* CoreGraphics.framework in Frameworks */,
 				43DAE5C1192109E800F54D72 /* UIKit.framework in Frameworks */,
 				43DAE5BD192109E800F54D72 /* Foundation.framework in Frameworks */,
@@ -101,6 +112,7 @@
 		43DAE5BB192109E800F54D72 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				43DAE5F119210BA600F54D72 /* CoreData.framework */,
 				43DAE5BC192109E800F54D72 /* Foundation.framework */,
 				43DAE5BE192109E800F54D72 /* CoreGraphics.framework */,
 				43DAE5C0192109E800F54D72 /* UIKit.framework */,
@@ -119,6 +131,11 @@
 				43DAE5D2192109E800F54D72 /* GWViewController.m */,
 				43DAE5D4192109E800F54D72 /* Images.xcassets */,
 				43DAE5C3192109E800F54D72 /* Supporting Files */,
+				43DAE5F319210D3B00F54D72 /* Model.xcdatamodeld */,
+				43DAE5F619210DEE00F54D72 /* Record.h */,
+				43DAE5F719210DEE00F54D72 /* Record.m */,
+				43DAE5F919211E6000F54D72 /* GWTableViewCell.h */,
+				43DAE5FA19211E6000F54D72 /* GWTableViewCell.m */,
 			);
 			path = FetchResultController;
 			sourceTree = "<group>";
@@ -249,9 +266,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43DAE5F819210DEE00F54D72 /* Record.m in Sources */,
+				43DAE5FB19211E6000F54D72 /* GWTableViewCell.m in Sources */,
 				43DAE5CD192109E800F54D72 /* GWAppDelegate.m in Sources */,
 				43DAE5D3192109E800F54D72 /* GWViewController.m in Sources */,
 				43DAE5C9192109E800F54D72 /* main.m in Sources */,
+				43DAE5F519210D3B00F54D72 /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,6 +486,19 @@
 			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		43DAE5F319210D3B00F54D72 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				43DAE5F419210D3B00F54D72 /* Model.xcdatamodel */,
+			);
+			currentVersion = 43DAE5F419210D3B00F54D72 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 43DAE5B1192109E800F54D72 /* Project object */;
 }

@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
-@interface GWViewController : UIViewController
+@interface GWViewController : UITableViewController <UITableViewDataSource, NSFetchedResultsControllerDelegate, UIAlertViewDelegate>
+
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+
+- (IBAction)addNewRecord:(id)sender;
 
 @end
