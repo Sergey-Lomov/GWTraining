@@ -29,12 +29,4 @@
     self.titleTextField.text = title;
 }
 
-- (IBAction)titleChanged:(id)sender {
-    
-    if ([sender isEqual:self.titleTextField])
-    {
-        [self.delegate subRecordCell:self didChageTitle:self.titleTextField.text];
-    }
-}
-
 @end

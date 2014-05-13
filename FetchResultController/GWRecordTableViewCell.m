@@ -10,15 +10,6 @@
 
 @implementation GWRecordTableViewCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        self.titleTextField.delegate = self;
-    }
-    return self;
-}
-
 - (NSString *)title
 {
     return self.titleTextField.text;
@@ -29,11 +20,4 @@
     self.titleTextField.text = title;
 }
 
-- (IBAction)titleChanged:(id)sender {
-    
-    if ([sender isEqual:self.titleTextField])
-    {
-        [self.delegate recordCell:self didChageTitle:self.titleTextField.text];
-    }
-}
 @end

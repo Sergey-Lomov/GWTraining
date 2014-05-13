@@ -26,7 +26,7 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                             <connections>
-                                                <action selector="titleChanged:" destination="khp-av-idH" eventType="editingChanged" id="kgR-dn-IPW"/>
+                                                <outlet property="delegate" destination="cxQ-ir-Zso" id="LSY-bg-24f"/>
                                             </connections>
                                         </textField>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OKy-S8-5cC">
@@ -84,7 +84,8 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             <connections>
-                                                <action selector="titleChanged:" destination="88S-4s-bVk" eventType="editingChanged" id="heD-gD-S0H"/>
+                                                <action selector="titleChanged:" destination="88S-4s-bVk" eventType="editingDidEnd" id="are-v5-UoT"/>
+                                                <outlet property="delegate" destination="B1f-fu-j8g" id="Jwz-57-Ap0"/>
                                             </connections>
                                         </textField>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ruk-GV-B2L">

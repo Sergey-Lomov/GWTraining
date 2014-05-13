@@ -12,7 +12,7 @@
 
 @class Record;
 
-@interface GWSubRecordsController : UITableViewController <UITableViewDataSource, NSFetchedResultsControllerDelegate, UIAlertViewDelegate, GWSubRecordTableViewCellDelegate>
+@interface GWSubRecordsController : UITableViewController <UITableViewDataSource, NSFetchedResultsControllerDelegate, UIAlertViewDelegate, UITextFieldDelegate>
 
 @property (nonatomic, weak) Record *record;
 

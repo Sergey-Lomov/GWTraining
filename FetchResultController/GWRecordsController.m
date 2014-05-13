@@ -16,6 +16,8 @@
 
 @property (nonatomic, strong) NSFetchedResultsController *recordsFetchedResultsController;
 
+@property (nonatomic, strong) NSMutableArray *cells;
+
 @end
 
 @implementation GWRecordsController
@@ -29,15 +31,18 @@
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
+    
+    self.cells = [NSMutableArray new];
 }
 
 - (void)dealloc
 {
     self.recordsFetchedResultsController.delegate = nil;
     self.recordsFetchedResultsController = nil;
+    self.cells = nil;
 }
 
-#pragma mark UITableViewDataSource protocol methods
+#pragma mark - UITableViewDataSource protocol methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
@@ -49,11 +54,6 @@
     
     static NSString *cellIdentifier = @"RecordCell";
     GWRecordTableViewCell *cell = (GWRecordTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-
-    if (cell.delegate == nil) {
-        
-        cell.delegate = self;
-    }
     
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
@@ -66,9 +66,29 @@
     
     NSInteger subRecordsCount = [[GWDataBaseController new] getSubRecordsForRecord:record].count;
     cell.detailsLabel.text = [NSString stringWithFormat:@"%d", subRecordsCount];
+    
+    if (indexPath.row < [[self.recordsFetchedResultsController.sections objectAtIndex:0] numberOfObjects] - 1) {
+        
+        cell.titleTextField.returnKeyType = UIReturnKeyNext;
+    }
+    else {
+        
+        cell.titleTextField.returnKeyType = UIReturnKeyDone;
+    }
 }
 
-#pragma mark NSFetchedResultsController methods
+#pragma mark - UITableViewDelegate protocol methods
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([tableView isEqual:self.tableView])
+    {
+        GWRecordTableViewCell *recordCell = (GWRecordTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+        [recordCell.titleTextField endEditing:YES];
+    }
+}
+
+#pragma mark - NSFetchedResultsController methods
 
 - (NSFetchedResultsController *)recordsFetchedResultsController {
     
@@ -133,7 +153,56 @@
     [self.tableView endUpdates];
 }
 
-#pragma mark UIAlertView methods
+#pragma mark - UITextField Delegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    UITableViewCell *cell = [self cellForTitleTextField:textField];
+    if (cell != nil) {
+        
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        
+        if (indexPath.row < self.recordsFetchedResultsController.fetchedObjects.count) {
+            
+            NSIndexPath *nextIndex = [NSIndexPath indexPathForRow:indexPath.row +1
+                                                       inSection:indexPath.section];
+            GWRecordTableViewCell *nextCell = (GWRecordTableViewCell *)[self.tableView cellForRowAtIndexPath:nextIndex];
+            [nextCell.titleTextField becomeFirstResponder];
+        }
+        else
+        {
+            [textField resignFirstResponder];
+        }
+    }
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    UITableViewCell *cell = [self cellForTitleTextField:textField];
+    if (cell != nil) {
+        
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        Record *record = [self.recordsFetchedResultsController objectAtIndexPath:indexPath];
+        [[GWDataBaseController new] setTitle:textField.text
+                                   forRecrod:record];
+    }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    UITableViewCell *cell = [self cellForTitleTextField:textField];
+    if (cell != nil) {
+        
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        Record *record = [self.recordsFetchedResultsController objectAtIndexPath:indexPath];
+        record.title = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    }
+    
+    return YES;
+}
+
+#pragma mark - UIAlertView methods
 
 - (IBAction)addNewRecord:(id)sender {
     
@@ -156,16 +225,7 @@
     }
 }
 
-#pragma mark GWRecordTableViewCellDelegate protocol methods
-
-- (void)recordCell:(GWRecordTableViewCell *)cell didChageTitle:(NSString *)title {
-    
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    Record *record = [self.recordsFetchedResultsController objectAtIndexPath:indexPath];
-    [[GWDataBaseController new] setTitle:title forRecrod:record];
-}
-
-#pragma mark other
+#pragma mark - Other
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -175,6 +235,18 @@
         Record *record = [self.recordsFetchedResultsController objectAtIndexPath:indexPath];
         [segue.destinationViewController setRecord:record];
     }
+}
+
+- (GWRecordTableViewCell *)cellForTitleTextField:(UITextField *)textField
+{
+    UIView *currentView = textField;
+    while (currentView != nil
+           && ![currentView isKindOfClass:[GWRecordTableViewCell class]]) {
+        
+        currentView = currentView.superview;
+    }
+    
+    return (GWRecordTableViewCell *)currentView;
 }
 
 @end

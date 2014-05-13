@@ -8,15 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@class GWRecordTableViewCell;
-
-@protocol GWRecordTableViewCellDelegate <NSObject>
-
-- (void)recordCell:(GWRecordTableViewCell *)cell didChageTitle:(NSString *)title;
-
-@end
-
-
 
 @interface GWRecordTableViewCell : UITableViewCell <UITextFieldDelegate>
 
@@ -24,9 +15,5 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 @property (weak, nonatomic) IBOutlet UILabel *detailsLabel;
-
-@property (weak, nonatomic) id<GWRecordTableViewCellDelegate> delegate;
-
-- (IBAction)titleChanged:(id)sender;
 
 @end

@@ -43,7 +43,7 @@
     self.title = record.title;
 }
 
-#pragma mark UITableViewDataSource protocol methods
+#pragma mark - UITableViewDataSource protocol methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
@@ -55,11 +55,6 @@
     
     static NSString *cellIdentifier = @"SubRecordCell";
     GWSubRecordTableViewCell *cell = (GWSubRecordTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
-    if (cell.delegate == nil) {
-        
-        cell.delegate = self;
-    }
     
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
@@ -75,7 +70,7 @@
     cell.detailsLabel.text = [dateFormatter stringFromDate:subRecord.creationDate];
 }
 
-#pragma mark NSFetchedResultsController methods
+#pragma mark - NSFetchedResultsController methods
 
 - (NSFetchedResultsController *)fetchedResultsController {
     
@@ -124,7 +119,7 @@
             break;
             
         case NSFetchedResultsChangeUpdate:
-            [self configureCell:[tableView cellForRowAtIndexPath:indexPath]
+            [self configureCell:(GWSubRecordTableViewCell *)[tableView cellForRowAtIndexPath:indexPath]
                     atIndexPath:indexPath];
             break;
             
@@ -140,7 +135,7 @@
     [self.tableView endUpdates];
 }
 
-#pragma mark UIAlertView methods
+#pragma mark - UIAlertView methods
 
 - (IBAction)addNewSubRecord:(id)sender {
     
@@ -149,6 +144,7 @@
                                                   delegate:self
                                          cancelButtonTitle:@"Cancel"
                                          otherButtonTitles:@"OK", nil];
+    [alert textFieldAtIndex:0].keyboardType = UIKeyboardTypeNumberPad;
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     [alert show];
 }
@@ -174,13 +170,30 @@
     }
 }
 
-#pragma mark GWSubRecordTableViewCell protocol methods
+#pragma mark - UITextFieldDelegate protocol methods
 
-- (void)subRecordCell:(GWSubRecordTableViewCell *)cell didChageTitle:(NSString *)title
+- (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    SubRecord *subRecord = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    [[GWDataBaseController new] setTitle:title forSubRecrod:subRecord];
+    UITableViewCell *cell = [self cellForTitleTextField:textField];
+    if (cell != nil) {
+        
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        Record *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        [[GWDataBaseController new] setTitle:textField.text
+                                   forRecrod:record];
+    }
+}
+
+- (GWSubRecordTableViewCell *)cellForTitleTextField:(UITextField *)textField
+{
+    UIView *currentView = textField;
+    while (currentView != nil
+           && ![currentView isKindOfClass:[GWSubRecordTableViewCell class]]) {
+        
+        currentView = currentView.superview;
+    }
+    
+    return (GWSubRecordTableViewCell *)currentView;
 }
 
 @end

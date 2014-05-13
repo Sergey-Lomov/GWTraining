@@ -10,7 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "GWRecordTableViewCell.h"
 
-@interface GWRecordsController : UITableViewController <UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, UIAlertViewDelegate, GWRecordTableViewCellDelegate>
+@interface GWRecordsController : UITableViewController <UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, UIAlertViewDelegate, UITextFieldDelegate>
 
 - (IBAction)addNewRecord:(id)sender;
 
