@@ -27,6 +27,8 @@
 		43DAE60719212DD200F54D72 /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DAE60619212DD200F54D72 /* Record.m */; };
 		43DAE60E192139F700F54D72 /* SubRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DAE60D192139F700F54D72 /* SubRecord.m */; };
 		43DAE61219221A0800F54D72 /* GWDataBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DAE61119221A0800F54D72 /* GWDataBaseController.m */; };
+		43DAE6151922207D00F54D72 /* GWRecordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DAE6141922207D00F54D72 /* GWRecordTableViewCell.m */; };
+		43DAE6201922322E00F54D72 /* GWSubRecordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DAE61F1922322E00F54D72 /* GWSubRecordTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +72,10 @@
 		43DAE60F19220C6900F54D72 /* Model_v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v2.xcdatamodel; sourceTree = "<group>"; };
 		43DAE61019221A0800F54D72 /* GWDataBaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWDataBaseController.h; sourceTree = "<group>"; };
 		43DAE61119221A0800F54D72 /* GWDataBaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWDataBaseController.m; sourceTree = "<group>"; };
+		43DAE6131922207D00F54D72 /* GWRecordTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWRecordTableViewCell.h; sourceTree = "<group>"; };
+		43DAE6141922207D00F54D72 /* GWRecordTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWRecordTableViewCell.m; sourceTree = "<group>"; };
+		43DAE61E1922322E00F54D72 /* GWSubRecordTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWSubRecordTableViewCell.h; sourceTree = "<group>"; };
+		43DAE61F1922322E00F54D72 /* GWSubRecordTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWSubRecordTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,14 +137,12 @@
 		43DAE5C2192109E800F54D72 /* FetchResultController */ = {
 			isa = PBXGroup;
 			children = (
+				43DAE61719222FF600F54D72 /* SubRecordsTable */,
+				43DAE616192225AA00F54D72 /* RecordsTable */,
 				43DAE608192131CB00F54D72 /* DataModel */,
 				43DAE5CB192109E800F54D72 /* GWAppDelegate.h */,
 				43DAE5CC192109E800F54D72 /* GWAppDelegate.m */,
 				43DAE5CE192109E800F54D72 /* Main.storyboard */,
-				43DAE5D1192109E800F54D72 /* GWRecordsController.h */,
-				43DAE5D2192109E800F54D72 /* GWRecordsController.m */,
-				43DAE5FC19212CA600F54D72 /* GWSubRecordsController.h */,
-				43DAE5FD19212CA600F54D72 /* GWSubRecordsController.m */,
 				43DAE5D4192109E800F54D72 /* Images.xcassets */,
 				43DAE5C3192109E800F54D72 /* Supporting Files */,
 			);
@@ -186,6 +190,28 @@
 				43DAE61119221A0800F54D72 /* GWDataBaseController.m */,
 			);
 			name = DataModel;
+			sourceTree = "<group>";
+		};
+		43DAE616192225AA00F54D72 /* RecordsTable */ = {
+			isa = PBXGroup;
+			children = (
+				43DAE5D1192109E800F54D72 /* GWRecordsController.h */,
+				43DAE5D2192109E800F54D72 /* GWRecordsController.m */,
+				43DAE6131922207D00F54D72 /* GWRecordTableViewCell.h */,
+				43DAE6141922207D00F54D72 /* GWRecordTableViewCell.m */,
+			);
+			name = RecordsTable;
+			sourceTree = "<group>";
+		};
+		43DAE61719222FF600F54D72 /* SubRecordsTable */ = {
+			isa = PBXGroup;
+			children = (
+				43DAE5FC19212CA600F54D72 /* GWSubRecordsController.h */,
+				43DAE5FD19212CA600F54D72 /* GWSubRecordsController.m */,
+				43DAE61E1922322E00F54D72 /* GWSubRecordTableViewCell.h */,
+				43DAE61F1922322E00F54D72 /* GWSubRecordTableViewCell.m */,
+			);
+			name = SubRecordsTable;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -286,6 +312,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				43DAE61219221A0800F54D72 /* GWDataBaseController.m in Sources */,
+				43DAE6201922322E00F54D72 /* GWSubRecordTableViewCell.m in Sources */,
+				43DAE6151922207D00F54D72 /* GWRecordTableViewCell.m in Sources */,
 				43DAE5CD192109E800F54D72 /* GWAppDelegate.m in Sources */,
 				43DAE60719212DD200F54D72 /* Record.m in Sources */,
 				43DAE5D3192109E800F54D72 /* GWRecordsController.m in Sources */,

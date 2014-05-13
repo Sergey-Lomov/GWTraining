@@ -48,20 +48,24 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *cellIdentifier = @"RecordCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    GWRecordTableViewCell *cell = (GWRecordTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 
+    if (cell.delegate == nil) {
+        
+        cell.delegate = self;
+    }
     
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+- (void)configureCell:(GWRecordTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
     Record *record = [self.recordsFetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = record.title;
+    cell.titleTextField.text = record.title;
     
     NSInteger subRecordsCount = [[GWDataBaseController new] getSubRecordsForRecord:record].count;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", subRecordsCount];
+    cell.detailsLabel.text = [NSString stringWithFormat:@"%d", subRecordsCount];
 }
 
 #pragma mark NSFetchedResultsController methods
@@ -112,7 +116,7 @@
                 break;
                 
             case NSFetchedResultsChangeUpdate:
-                [self configureCell:[self.tableView cellForRowAtIndexPath:indexPath]
+                [self configureCell:(GWRecordTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath]
                         atIndexPath:indexPath];
                 break;
                 
@@ -146,20 +150,22 @@
     
     if (buttonIndex == 1) {
         
-        NSManagedObjectContext *managedObjectContext = ((GWAppDelegate *)[UIApplication sharedApplication].delegate).managedObjectContext;
-        Record *record = [NSEntityDescription insertNewObjectForEntityForName:@"Record"
-                                                       inManagedObjectContext:managedObjectContext];
-        record.title = [alertView textFieldAtIndex:0].text;
-        record.creationDate = [NSDate date];
-        
-        NSError *error = nil;
-        [managedObjectContext save:&error];
-        if (error) {
-            
-            NSLog(@"Error at new record saving");
-        }
+        [[GWDataBaseController new] addRecordWithTitle:[alertView textFieldAtIndex:0].text
+                                          creationDate:[NSDate date]];
+ 
     }
 }
+
+#pragma mark GWRecordTableViewCellDelegate protocol methods
+
+- (void)recordCell:(GWRecordTableViewCell *)cell didChageTitle:(NSString *)title {
+    
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    Record *record = [self.recordsFetchedResultsController objectAtIndexPath:indexPath];
+    [[GWDataBaseController new] setTitle:title forRecrod:record];
+}
+
+#pragma mark other
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {

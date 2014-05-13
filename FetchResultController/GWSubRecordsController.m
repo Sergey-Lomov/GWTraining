@@ -8,6 +8,7 @@
 
 #import "GWAppDelegate.h"
 #import "GWSubRecordsController.h"
+#import "GWDataBaseController.h"
 #import "Record.h"
 #import "SubRecord.h"
 
@@ -53,28 +54,25 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *cellIdentifier = @"SubRecordCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    GWSubRecordTableViewCell *cell = (GWSubRecordTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
-    if (cell == nil)
-    {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
-                                      reuseIdentifier:cellIdentifier];
-        cell.detailTextLabel.textColor = [UIColor lightGrayColor];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    if (cell.delegate == nil) {
+        
+        cell.delegate = self;
     }
     
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+- (void)configureCell:(GWSubRecordTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     SubRecord *subRecord = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = subRecord.title;
+    cell.title = subRecord.title;
     
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     [dateFormatter setDateFormat: @"yyyy-MM-dd"];
-    cell.detailTextLabel.text = [dateFormatter stringFromDate:subRecord.creationDate];
+    cell.detailsLabel.text = [dateFormatter stringFromDate:subRecord.creationDate];
 }
 
 #pragma mark NSFetchedResultsController methods
@@ -175,4 +173,14 @@
         }
     }
 }
+
+#pragma mark GWSubRecordTableViewCell protocol methods
+
+- (void)subRecordCell:(GWSubRecordTableViewCell *)cell didChageTitle:(NSString *)title
+{
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    SubRecord *subRecord = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    [[GWDataBaseController new] setTitle:title forSubRecrod:subRecord];
+}
+
 @end

@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import "GWSubRecordTableViewCell.h"
 
 @class Record;
 
-@interface GWSubRecordsController : UITableViewController <UITableViewDataSource, NSFetchedResultsControllerDelegate, UIAlertViewDelegate>
+@interface GWSubRecordsController : UITableViewController <UITableViewDataSource, NSFetchedResultsControllerDelegate, UIAlertViewDelegate, GWSubRecordTableViewCellDelegate>
 
 @property (nonatomic, weak) Record *record;
 
