@@ -63,7 +63,7 @@
 - (void)configureCell:(GWSubRecordTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     SubRecord *subRecord = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.title = subRecord.title;
+    cell.title = [subRecord.title stringValue];
     
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     [dateFormatter setDateFormat: @"yyyy-MM-dd"];
@@ -144,8 +144,8 @@
                                                   delegate:self
                                          cancelButtonTitle:@"Cancel"
                                          otherButtonTitles:@"OK", nil];
-    [alert textFieldAtIndex:0].keyboardType = UIKeyboardTypeNumberPad;
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alert textFieldAtIndex:0].keyboardType = UIKeyboardTypeNumberPad;
     [alert show];
 }
 
@@ -156,7 +156,7 @@
         NSManagedObjectContext *managedObjectContext = ((GWAppDelegate *)[UIApplication sharedApplication].delegate).managedObjectContext;
         SubRecord *subRecord = [NSEntityDescription insertNewObjectForEntityForName:@"SubRecord"
                                                        inManagedObjectContext:managedObjectContext];
-        subRecord.title = [alertView textFieldAtIndex:0].text;
+        subRecord.title = [NSNumber numberWithInt:[[alertView textFieldAtIndex:0].text intValue]];
         subRecord.creationDate = [NSDate date];
         
         [self.record addChildsObject:subRecord];
@@ -178,9 +178,9 @@
     if (cell != nil) {
         
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-        Record *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
-        [[GWDataBaseController new] setTitle:textField.text
-                                   forRecrod:record];
+        SubRecord *subRecord = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        [[GWDataBaseController new] setTitle:[NSNumber numberWithInt:[textField.text intValue]]
+                                forSubRecrod:subRecord];
     }
 }
 

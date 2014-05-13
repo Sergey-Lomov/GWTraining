@@ -53,6 +53,6 @@
  
  @return Return YES if title has been successfully changed. In other case return NO.
  */
-- (BOOL)setTitle:(NSString *)title forSubRecrod:(SubRecord *)subRecord;
+- (BOOL)setTitle:(NSNumber *)title forSubRecrod:(SubRecord *)subRecord;
 
 @end

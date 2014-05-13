@@ -2,7 +2,7 @@
 //  SubRecord.m
 //  FetchResultController
 //
-//  Created by Sergii Lomov on 12/05/14.
+//  Created by Sergii Lomov on 13/05/14.
 //
 //
 
@@ -12,8 +12,8 @@
 
 @implementation SubRecord
 
-@dynamic title;
 @dynamic creationDate;
+@dynamic title;
 @dynamic parent;
 
 @end

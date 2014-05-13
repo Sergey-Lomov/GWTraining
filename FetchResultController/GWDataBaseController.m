@@ -74,7 +74,7 @@
     return YES;
 }
 
-- (BOOL)setTitle:(NSString *)title forSubRecrod:(SubRecord *)subRecord
+- (BOOL)setTitle:(NSNumber *)title forSubRecrod:(SubRecord *)subRecord
 {
     subRecord.title = title;
     
