@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		43386767192269DC0009D05A /* MappingModelv2_v3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 43386766192269DC0009D05A /* MappingModelv2_v3.xcmappingmodel */; };
+		4338676D19226ADD0009D05A /* GWSubRecordMigrationPolicyv2_v3.m in Sources */ = {isa = PBXBuildFile; fileRef = 4338676C19226ADD0009D05A /* GWSubRecordMigrationPolicyv2_v3.m */; };
 		43DAE5BD192109E800F54D72 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43DAE5BC192109E800F54D72 /* Foundation.framework */; };
 		43DAE5BF192109E800F54D72 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43DAE5BE192109E800F54D72 /* CoreGraphics.framework */; };
 		43DAE5C1192109E800F54D72 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43DAE5C0192109E800F54D72 /* UIKit.framework */; };
@@ -42,6 +44,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		43386765192269940009D05A /* Model_v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v3.xcdatamodel; sourceTree = "<group>"; };
+		43386766192269DC0009D05A /* MappingModelv2_v3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = MappingModelv2_v3.xcmappingmodel; sourceTree = "<group>"; };
+		4338676B19226ADD0009D05A /* GWSubRecordMigrationPolicyv2_v3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWSubRecordMigrationPolicyv2_v3.h; sourceTree = "<group>"; };
+		4338676C19226ADD0009D05A /* GWSubRecordMigrationPolicyv2_v3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWSubRecordMigrationPolicyv2_v3.m; sourceTree = "<group>"; };
 		43DAE5B9192109E800F54D72 /* FetchResultController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FetchResultController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43DAE5BC192109E800F54D72 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		43DAE5BE192109E800F54D72 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -182,6 +188,9 @@
 			isa = PBXGroup;
 			children = (
 				43DAE5F319210D3B00F54D72 /* Model.xcdatamodeld */,
+				43386766192269DC0009D05A /* MappingModelv2_v3.xcmappingmodel */,
+				4338676B19226ADD0009D05A /* GWSubRecordMigrationPolicyv2_v3.h */,
+				4338676C19226ADD0009D05A /* GWSubRecordMigrationPolicyv2_v3.m */,
 				43DAE60C192139F700F54D72 /* SubRecord.h */,
 				43DAE60D192139F700F54D72 /* SubRecord.m */,
 				43DAE60519212DD200F54D72 /* Record.h */,
@@ -311,8 +320,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43386767192269DC0009D05A /* MappingModelv2_v3.xcmappingmodel in Sources */,
 				43DAE61219221A0800F54D72 /* GWDataBaseController.m in Sources */,
 				43DAE6201922322E00F54D72 /* GWSubRecordTableViewCell.m in Sources */,
+				4338676D19226ADD0009D05A /* GWSubRecordMigrationPolicyv2_v3.m in Sources */,
 				43DAE6151922207D00F54D72 /* GWRecordTableViewCell.m in Sources */,
 				43DAE5CD192109E800F54D72 /* GWAppDelegate.m in Sources */,
 				43DAE60719212DD200F54D72 /* Record.m in Sources */,
@@ -542,10 +553,11 @@
 		43DAE5F319210D3B00F54D72 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				43386765192269940009D05A /* Model_v3.xcdatamodel */,
 				43DAE60F19220C6900F54D72 /* Model_v2.xcdatamodel */,
 				43DAE5F419210D3B00F54D72 /* Model.xcdatamodel */,
 			);
-			currentVersion = 43DAE60F19220C6900F54D72 /* Model_v2.xcdatamodel */;
+			currentVersion = 43386765192269940009D05A /* Model_v3.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

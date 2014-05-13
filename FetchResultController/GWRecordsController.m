@@ -162,7 +162,7 @@
         
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
         
-        if (indexPath.row < self.recordsFetchedResultsController.fetchedObjects.count) {
+        if (indexPath.row < self.recordsFetchedResultsController.fetchedObjects.count - 1) {
             
             NSIndexPath *nextIndex = [NSIndexPath indexPathForRow:indexPath.row +1
                                                        inSection:indexPath.section];
