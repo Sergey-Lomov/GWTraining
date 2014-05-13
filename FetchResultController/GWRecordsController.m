@@ -9,11 +9,12 @@
 #import "GWAppDelegate.h"
 #import "GWRecordsController.h"
 #import "GWSubRecordsController.h"
+#import "GWDataBaseController.h"
 #import "Record.h"
 
 @interface GWRecordsController ()
 
-@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) NSFetchedResultsController *recordsFetchedResultsController;
 
 @end
 
@@ -24,7 +25,7 @@
     [super viewDidLoad];
     
     NSError *error;
-    if (![[self fetchedResultsController] performFetch:&error]) {
+    if (![[self recordsFetchedResultsController] performFetch:&error]) {
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
@@ -32,15 +33,15 @@
 
 - (void)dealloc
 {
-    self.fetchedResultsController.delegate = nil;
-    self.fetchedResultsController = nil;
+    self.recordsFetchedResultsController.delegate = nil;
+    self.recordsFetchedResultsController = nil;
 }
 
 #pragma mark UITableViewDataSource protocol methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.recordsFetchedResultsController sections] objectAtIndex:section];
     return [sectionInfo numberOfObjects];
 }
 
@@ -56,20 +57,19 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
-    Record *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    Record *record = [self.recordsFetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = record.title;
     
-    NSDateFormatter *dateFormatter = [NSDateFormatter new];
-    [dateFormatter setDateFormat: @"yyyy-MM-dd hh:mm:ss"];
-    cell.detailTextLabel.text = [dateFormatter stringFromDate:record.creationDate];
+    NSInteger subRecordsCount = [[GWDataBaseController new] getSubRecordsForRecord:record].count;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", subRecordsCount];
 }
 
 #pragma mark NSFetchedResultsController methods
 
-- (NSFetchedResultsController *)fetchedResultsController {
+- (NSFetchedResultsController *)recordsFetchedResultsController {
     
-    if (_fetchedResultsController != nil) {
-        return _fetchedResultsController;
+    if (_recordsFetchedResultsController != nil) {
+        return _recordsFetchedResultsController;
     }
     
     
@@ -83,13 +83,13 @@
     NSArray *sortDescriptors = @[dateDescriptor];
     [fetchRequest setSortDescriptors:sortDescriptors];
     
-    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+    _recordsFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                                                     managedObjectContext:managedObjectContext
                                                                       sectionNameKeyPath:nil
                                                                                cacheName:nil];
-    _fetchedResultsController.delegate = self;
+    _recordsFetchedResultsController.delegate = self;
     
-    return _fetchedResultsController;
+    return _recordsFetchedResultsController;
 }
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
@@ -99,27 +99,28 @@
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
     
-    UITableView *tableView = self.tableView;
-    
-    switch(type) {
-            
-        case NSFetchedResultsChangeInsert:
-            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            break;
-            
-        case NSFetchedResultsChangeDelete:
-            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            break;
-            
-        case NSFetchedResultsChangeUpdate:
-            [self configureCell:[tableView cellForRowAtIndexPath:indexPath]
-                    atIndexPath:indexPath];
-            break;
-            
-        case NSFetchedResultsChangeMove:
-            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            break;
+    if ([controller isEqual: self.recordsFetchedResultsController])
+    {
+        switch(type) {
+                
+            case NSFetchedResultsChangeInsert:
+                [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                break;
+                
+            case NSFetchedResultsChangeDelete:
+                [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                break;
+                
+            case NSFetchedResultsChangeUpdate:
+                [self configureCell:[self.tableView cellForRowAtIndexPath:indexPath]
+                        atIndexPath:indexPath];
+                break;
+                
+            case NSFetchedResultsChangeMove:
+                [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                break;
+        }
     }
 }
 
@@ -165,7 +166,7 @@
     if ([segue.destinationViewController isKindOfClass:[GWSubRecordsController class]])
     {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-        Record *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        Record *record = [self.recordsFetchedResultsController objectAtIndexPath:indexPath];
         [segue.destinationViewController setRecord:record];
     }
 }

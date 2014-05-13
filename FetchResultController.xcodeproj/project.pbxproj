@@ -26,6 +26,7 @@
 		43DAE5FE19212CA600F54D72 /* GWSubRecordsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DAE5FD19212CA600F54D72 /* GWSubRecordsController.m */; };
 		43DAE60719212DD200F54D72 /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DAE60619212DD200F54D72 /* Record.m */; };
 		43DAE60E192139F700F54D72 /* SubRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DAE60D192139F700F54D72 /* SubRecord.m */; };
+		43DAE61219221A0800F54D72 /* GWDataBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DAE61119221A0800F54D72 /* GWDataBaseController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,8 @@
 		43DAE60C192139F700F54D72 /* SubRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubRecord.h; sourceTree = "<group>"; };
 		43DAE60D192139F700F54D72 /* SubRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubRecord.m; sourceTree = "<group>"; };
 		43DAE60F19220C6900F54D72 /* Model_v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v2.xcdatamodel; sourceTree = "<group>"; };
+		43DAE61019221A0800F54D72 /* GWDataBaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWDataBaseController.h; sourceTree = "<group>"; };
+		43DAE61119221A0800F54D72 /* GWDataBaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWDataBaseController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +182,8 @@
 				43DAE60D192139F700F54D72 /* SubRecord.m */,
 				43DAE60519212DD200F54D72 /* Record.h */,
 				43DAE60619212DD200F54D72 /* Record.m */,
+				43DAE61019221A0800F54D72 /* GWDataBaseController.h */,
+				43DAE61119221A0800F54D72 /* GWDataBaseController.m */,
 			);
 			name = DataModel;
 			sourceTree = "<group>";
@@ -280,6 +285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43DAE61219221A0800F54D72 /* GWDataBaseController.m in Sources */,
 				43DAE5CD192109E800F54D72 /* GWAppDelegate.m in Sources */,
 				43DAE60719212DD200F54D72 /* Record.m in Sources */,
 				43DAE5D3192109E800F54D72 /* GWRecordsController.m in Sources */,
