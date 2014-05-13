@@ -60,7 +60,7 @@
     cell.textLabel.text = record.title;
     
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
-    [dateFormatter setDateFormat: @"yyyy-MM-dd"];
+    [dateFormatter setDateFormat: @"yyyy-MM-dd hh:mm:ss"];
     cell.detailTextLabel.text = [dateFormatter stringFromDate:record.creationDate];
 }
 

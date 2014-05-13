@@ -166,7 +166,6 @@
         subRecord.creationDate = [NSDate date];
         
         [self.record addChildsObject:subRecord];
-        subRecord.parent = self.record;
         
         NSError *error = nil;
         [managedObjectContext save:&error];
