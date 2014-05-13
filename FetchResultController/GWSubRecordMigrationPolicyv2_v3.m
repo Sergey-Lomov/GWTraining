@@ -16,9 +16,9 @@
                                                                inManagedObjectContext:[manager destinationContext]];
     
     [dInstance setValue:[sInstance valueForKey:@"creationDate"] forKey:@"creationDate"];
-    [dInstance setValue:[sInstance valueForKey:@"parent"] forKey:@"parent"];
+ //   [dInstance setValue:[sInstance valueForKey:@"parent"] forKey:@"parent"];
     NSInteger intTitle = [[sInstance valueForKey:@"title"] intValue];
-    [dInstance setValue:[NSNumber numberWithInt:intTitle] forKey:@"parent"];
+    [dInstance setValue:[NSNumber numberWithInt:intTitle] forKey:@"title"];
     
     [manager associateSourceInstance:sInstance withDestinationInstance:dInstance forEntityMapping:mapping];
     
