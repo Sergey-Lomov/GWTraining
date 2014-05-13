@@ -59,13 +59,14 @@
 		43DAE5E5192109E800F54D72 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		43DAE5E7192109E800F54D72 /* FetchResultControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FetchResultControllerTests.m; sourceTree = "<group>"; };
 		43DAE5F119210BA600F54D72 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		43DAE5F419210D3B00F54D72 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		43DAE5F419210D3B00F54D72 /* Model.xcdatamodel */ = {isa = PBXFileReference; explicitFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		43DAE5FC19212CA600F54D72 /* GWSubRecordsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWSubRecordsController.h; sourceTree = "<group>"; };
 		43DAE5FD19212CA600F54D72 /* GWSubRecordsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWSubRecordsController.m; sourceTree = "<group>"; };
 		43DAE60519212DD200F54D72 /* Record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Record.h; sourceTree = "<group>"; };
 		43DAE60619212DD200F54D72 /* Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Record.m; sourceTree = "<group>"; };
 		43DAE60C192139F700F54D72 /* SubRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubRecord.h; sourceTree = "<group>"; };
 		43DAE60D192139F700F54D72 /* SubRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubRecord.m; sourceTree = "<group>"; };
+		43DAE60F19220C6900F54D72 /* Model_v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v2.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -490,6 +491,7 @@
 				43DAE5ED192109E800F54D72 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		43DAE5EE192109E800F54D72 /* Build configuration list for PBXNativeTarget "FetchResultControllerTests" */ = {
 			isa = XCConfigurationList;
@@ -498,6 +500,7 @@
 				43DAE5F0192109E800F54D72 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
@@ -505,9 +508,10 @@
 		43DAE5F319210D3B00F54D72 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				43DAE60F19220C6900F54D72 /* Model_v2.xcdatamodel */,
 				43DAE5F419210D3B00F54D72 /* Model.xcdatamodel */,
 			);
-			currentVersion = 43DAE5F419210D3B00F54D72 /* Model.xcdatamodel */;
+			currentVersion = 43DAE60F19220C6900F54D72 /* Model_v2.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
