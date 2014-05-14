@@ -10,8 +10,17 @@
 #import <CoreData/CoreData.h>
 #import "GWRecordTableViewCell.h"
 
-@interface GWRecordsController : UITableViewController <UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, UIAlertViewDelegate, UITextFieldDelegate>
+@interface GWRecordsController : UITableViewController <NSFetchedResultsControllerDelegate, UIAlertViewDelegate, UITextFieldDelegate, UIActionSheetDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
+
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *editRecordsButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *addRecordButton;
+
 
 - (IBAction)addNewRecord:(id)sender;
+- (IBAction)editRecords:(id)sender;
+- (IBAction)showGroupingPicker:(id)sender;
+
+
+- (void)reloadData;
 
 @end

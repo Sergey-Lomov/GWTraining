@@ -3,7 +3,7 @@
     <entity name="Record" representedClassName="Record" syncable="YES">
         <attribute name="creationDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="childs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SubRecord" inverseName="parent" inverseEntity="SubRecord" syncable="YES"/>
+        <relationship name="childs" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SubRecord" inverseName="parent" inverseEntity="SubRecord" syncable="YES"/>
     </entity>
     <entity name="SubRecord" representedClassName="SubRecord" syncable="YES">
         <attribute name="creationDate" optional="YES" attributeType="Date" syncable="YES"/>
@@ -11,7 +11,7 @@
         <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Record" inverseName="childs" inverseEntity="Record" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Record" positionX="-90" positionY="-18" width="128" height="90"/>
+        <element name="Record" positionX="-90" positionY="-18" width="128" height="88"/>
         <element name="SubRecord" positionX="162" positionY="-16" width="128" height="90"/>
     </elements>
 </model>

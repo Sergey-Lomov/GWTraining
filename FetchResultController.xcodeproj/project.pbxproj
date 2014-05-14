@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4338676D19226ADD0009D05A /* GWSubRecordMigrationPolicyv2_v3.m in Sources */ = {isa = PBXBuildFile; fileRef = 4338676C19226ADD0009D05A /* GWSubRecordMigrationPolicyv2_v3.m */; };
 		437B6E3A19227850007889C8 /* MappingModelv2_v3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 437B6E3919227850007889C8 /* MappingModelv2_v3.xcmappingmodel */; };
+		437B6E3D19236BC8007889C8 /* Record+Grouping.m in Sources */ = {isa = PBXBuildFile; fileRef = 437B6E3C19236BC8007889C8 /* Record+Grouping.m */; };
+		437B6E491923B5E6007889C8 /* NSManagedObject+ActiveRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 437B6E481923B5E6007889C8 /* NSManagedObject+ActiveRecord.m */; };
 		43DAE5BD192109E800F54D72 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43DAE5BC192109E800F54D72 /* Foundation.framework */; };
 		43DAE5BF192109E800F54D72 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43DAE5BE192109E800F54D72 /* CoreGraphics.framework */; };
 		43DAE5C1192109E800F54D72 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43DAE5C0192109E800F54D72 /* UIKit.framework */; };
@@ -28,7 +30,6 @@
 		43DAE5FE19212CA600F54D72 /* GWSubRecordsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DAE5FD19212CA600F54D72 /* GWSubRecordsController.m */; };
 		43DAE60719212DD200F54D72 /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DAE60619212DD200F54D72 /* Record.m */; };
 		43DAE60E192139F700F54D72 /* SubRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DAE60D192139F700F54D72 /* SubRecord.m */; };
-		43DAE61219221A0800F54D72 /* GWDataBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DAE61119221A0800F54D72 /* GWDataBaseController.m */; };
 		43DAE6151922207D00F54D72 /* GWRecordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DAE6141922207D00F54D72 /* GWRecordTableViewCell.m */; };
 		43DAE6201922322E00F54D72 /* GWSubRecordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DAE61F1922322E00F54D72 /* GWSubRecordTableViewCell.m */; };
 /* End PBXBuildFile section */
@@ -48,6 +49,10 @@
 		4338676B19226ADD0009D05A /* GWSubRecordMigrationPolicyv2_v3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWSubRecordMigrationPolicyv2_v3.h; sourceTree = "<group>"; };
 		4338676C19226ADD0009D05A /* GWSubRecordMigrationPolicyv2_v3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWSubRecordMigrationPolicyv2_v3.m; sourceTree = "<group>"; };
 		437B6E3919227850007889C8 /* MappingModelv2_v3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = MappingModelv2_v3.xcmappingmodel; sourceTree = "<group>"; };
+		437B6E3B19236BC8007889C8 /* Record+Grouping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+Grouping.h"; sourceTree = "<group>"; };
+		437B6E3C19236BC8007889C8 /* Record+Grouping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+Grouping.m"; sourceTree = "<group>"; };
+		437B6E471923B5E6007889C8 /* NSManagedObject+ActiveRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+ActiveRecord.h"; sourceTree = "<group>"; };
+		437B6E481923B5E6007889C8 /* NSManagedObject+ActiveRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+ActiveRecord.m"; sourceTree = "<group>"; };
 		43DAE5B9192109E800F54D72 /* FetchResultController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FetchResultController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43DAE5BC192109E800F54D72 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		43DAE5BE192109E800F54D72 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -76,8 +81,6 @@
 		43DAE60C192139F700F54D72 /* SubRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubRecord.h; sourceTree = "<group>"; };
 		43DAE60D192139F700F54D72 /* SubRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubRecord.m; sourceTree = "<group>"; };
 		43DAE60F19220C6900F54D72 /* Model_v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v2.xcdatamodel; sourceTree = "<group>"; };
-		43DAE61019221A0800F54D72 /* GWDataBaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWDataBaseController.h; sourceTree = "<group>"; };
-		43DAE61119221A0800F54D72 /* GWDataBaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWDataBaseController.m; sourceTree = "<group>"; };
 		43DAE6131922207D00F54D72 /* GWRecordTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWRecordTableViewCell.h; sourceTree = "<group>"; };
 		43DAE6141922207D00F54D72 /* GWRecordTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWRecordTableViewCell.m; sourceTree = "<group>"; };
 		43DAE61E1922322E00F54D72 /* GWSubRecordTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWSubRecordTableViewCell.h; sourceTree = "<group>"; };
@@ -109,6 +112,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		437B6E41192382D8007889C8 /* GroupingSetting */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = GroupingSetting;
+			sourceTree = "<group>";
+		};
 		43DAE5B0192109E800F54D72 = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +197,8 @@
 		43DAE608192131CB00F54D72 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				437B6E471923B5E6007889C8 /* NSManagedObject+ActiveRecord.h */,
+				437B6E481923B5E6007889C8 /* NSManagedObject+ActiveRecord.m */,
 				43DAE5F319210D3B00F54D72 /* Model.xcdatamodeld */,
 				437B6E3919227850007889C8 /* MappingModelv2_v3.xcmappingmodel */,
 				4338676B19226ADD0009D05A /* GWSubRecordMigrationPolicyv2_v3.h */,
@@ -195,8 +207,6 @@
 				43DAE60D192139F700F54D72 /* SubRecord.m */,
 				43DAE60519212DD200F54D72 /* Record.h */,
 				43DAE60619212DD200F54D72 /* Record.m */,
-				43DAE61019221A0800F54D72 /* GWDataBaseController.h */,
-				43DAE61119221A0800F54D72 /* GWDataBaseController.m */,
 			);
 			name = DataModel;
 			sourceTree = "<group>";
@@ -204,10 +214,13 @@
 		43DAE616192225AA00F54D72 /* RecordsTable */ = {
 			isa = PBXGroup;
 			children = (
+				437B6E41192382D8007889C8 /* GroupingSetting */,
 				43DAE5D1192109E800F54D72 /* GWRecordsController.h */,
 				43DAE5D2192109E800F54D72 /* GWRecordsController.m */,
 				43DAE6131922207D00F54D72 /* GWRecordTableViewCell.h */,
 				43DAE6141922207D00F54D72 /* GWRecordTableViewCell.m */,
+				437B6E3B19236BC8007889C8 /* Record+Grouping.h */,
+				437B6E3C19236BC8007889C8 /* Record+Grouping.m */,
 			);
 			name = RecordsTable;
 			sourceTree = "<group>";
@@ -320,12 +333,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43DAE61219221A0800F54D72 /* GWDataBaseController.m in Sources */,
 				43DAE6201922322E00F54D72 /* GWSubRecordTableViewCell.m in Sources */,
 				4338676D19226ADD0009D05A /* GWSubRecordMigrationPolicyv2_v3.m in Sources */,
+				437B6E3D19236BC8007889C8 /* Record+Grouping.m in Sources */,
 				43DAE6151922207D00F54D72 /* GWRecordTableViewCell.m in Sources */,
 				43DAE5CD192109E800F54D72 /* GWAppDelegate.m in Sources */,
 				43DAE60719212DD200F54D72 /* Record.m in Sources */,
+				437B6E491923B5E6007889C8 /* NSManagedObject+ActiveRecord.m in Sources */,
 				437B6E3A19227850007889C8 /* MappingModelv2_v3.xcmappingmodel in Sources */,
 				43DAE5D3192109E800F54D72 /* GWRecordsController.m in Sources */,
 				43DAE5FE19212CA600F54D72 /* GWSubRecordsController.m in Sources */,

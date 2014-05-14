@@ -8,7 +8,7 @@
 
 #import "GWAppDelegate.h"
 #import "GWSubRecordsController.h"
-#import "GWDataBaseController.h"
+#import "NSManagedObject+ActiveRecord.h"
 #import "Record.h"
 #import "SubRecord.h"
 
@@ -24,11 +24,23 @@
     
     [super viewDidLoad];
     
+    NSManagedObjectContext *managedObjectContext = ((GWAppDelegate *)[UIApplication sharedApplication].delegate).managedObjectContext;
+    self.fetchedResultsController = [SubRecord fetchedControllerSortBy:@"creationDate"
+                                                             ascending:NO
+                                                               grouped:@"sectionTitle"
+                                                             inContext:managedObjectContext];
+    self.fetchedResultsController.delegate = self;
+    
     NSError *error;
     if (![[self fetchedResultsController] performFetch:&error]) {
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self.navigationController setToolbarHidden:YES animated:animated];
 }
 
 - (void)dealloc
@@ -43,7 +55,7 @@
     self.title = record.title;
 }
 
-#pragma mark - UITableViewDataSource protocol methods
+#pragma mark - UITableViewController methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
@@ -70,34 +82,16 @@
     cell.detailsLabel.text = [dateFormatter stringFromDate:subRecord.creationDate];
 }
 
-#pragma mark - NSFetchedResultsController methods
-
-- (NSFetchedResultsController *)fetchedResultsController {
-    
-    if (_fetchedResultsController != nil) {
-        return _fetchedResultsController;
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        SubRecord *subRecord = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        [subRecord deleteSelf];
     }
-    
-    NSManagedObjectContext *managedObjectContext = ((GWAppDelegate *)[UIApplication sharedApplication].delegate).managedObjectContext;
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"SubRecord"
-                                              inManagedObjectContext:managedObjectContext];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"parent = %@", self.record];
-    [fetchRequest setEntity:entity];
-    [fetchRequest setPredicate:predicate];
-    
-    NSSortDescriptor *dateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:NO];
-    NSArray *sortDescriptors = @[dateDescriptor];
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    
-    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-                                                                    managedObjectContext:managedObjectContext
-                                                                      sectionNameKeyPath:nil
-                                                                               cacheName:nil];
-    _fetchedResultsController.delegate = self;
-    
-    return _fetchedResultsController;
 }
+
+#pragma mark - NSFetchedResultsController methods
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     
@@ -179,8 +173,7 @@
         
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
         SubRecord *subRecord = [self.fetchedResultsController objectAtIndexPath:indexPath];
-        [[GWDataBaseController new] setTitle:[NSNumber numberWithInt:[textField.text intValue]]
-                                forSubRecrod:subRecord];
+        subRecord.title = [NSNumber numberWithInt:[textField.text intValue]];
     }
 }
 

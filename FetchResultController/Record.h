@@ -13,9 +13,10 @@
 
 @interface Record : NSManagedObject
 
-@property (nonatomic, retain) NSString * title;
-@property (nonatomic, retain) NSDate * creationDate;
+@property (nonatomic, retain) NSString *title;
+@property (nonatomic, retain) NSDate *creationDate;
 @property (nonatomic, retain) NSSet *childs;
+
 @end
 
 @interface Record (CoreDataGeneratedAccessors)
