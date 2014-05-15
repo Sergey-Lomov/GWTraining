@@ -15,7 +15,7 @@
 
 @property (nonatomic, retain) NSDate * creationDate;
 @property (nonatomic, retain) NSString * title;
-@property (nonatomic, retain) NSData * photo;
+@property (nonatomic, retain) NSString * photo;
 @property (nonatomic, retain) NSSet *childs;
 @end
 

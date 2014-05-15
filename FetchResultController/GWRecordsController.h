@@ -20,9 +20,6 @@
 - (IBAction)editRecords:(id)sender;
 - (IBAction)showGroupingPicker:(id)sender;
 
-- (void)startPhotoUpdate:(UITapGestureRecognizer *)recognizer;
-
-
 - (void)reloadData;
 
 @end

@@ -122,7 +122,7 @@
     }
     else
     {
-        cell.photoImage.image = [UIImage imageWithData:record.photo];
+        cell.photoImage.image = [UIImage imageWithContentsOfFile:record.photo];
     }
 }
 
@@ -416,7 +416,11 @@
     [cell.photoImage setImage:pickedImage];
     
     Record *record = [self.recordsFetchedResultsController objectAtIndexPath:self.editingPhotoCellPath];
-    record.photo = UIImagePNGRepresentation(pickedImage);
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *fileName = [NSString stringWithFormat:@"Record%@.png", record.creationDate];
+    NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:fileName];
+    [UIImagePNGRepresentation(pickedImage) writeToFile:filePath atomically:YES];
+    record.photo = filePath;
     
     self.editingPhotoCellPath = nil;
     [self dismissViewControllerAnimated:YES completion:nil];
