@@ -21,7 +21,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ezw-BP-Tg0">
-                                            <rect key="frame" x="20" y="8" width="226" height="30"/>
+                                            <rect key="frame" x="69" y="8" width="177" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
@@ -37,24 +37,32 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Creation date: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="On5-ZI-TbZ">
-                                            <rect key="frame" x="20" y="38" width="95" height="21"/>
+                                            <rect key="frame" x="69" y="41" width="101" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NIJ-Xu-Iz5">
-                                            <rect key="frame" x="118" y="38" width="128" height="21"/>
+                                            <rect key="frame" x="168" y="41" width="78" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="photo_placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="scb-kT-8kW">
+                                            <rect key="frame" x="9" y="7" width="47" height="47"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <gestureRecognizers/>
+                                        </imageView>
                                     </subviews>
+                                    <gestureRecognizers/>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="dateLabel" destination="NIJ-Xu-Iz5" id="54C-pV-mTt"/>
                                     <outlet property="detailsLabel" destination="OKy-S8-5cC" id="r7r-3K-mJ4"/>
+                                    <outlet property="photoImage" destination="scb-kT-8kW" id="yaR-eR-vGc"/>
                                     <outlet property="titleTextField" destination="ezw-BP-Tg0" id="wc4-zV-319"/>
                                     <segue destination="B1f-fu-j8g" kind="push" identifier="subRecordsSeque" id="KgE-h4-qDf"/>
                                 </connections>
@@ -178,6 +186,9 @@
             <point key="canvasLocation" x="-456" y="152"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="photo_placeholder.png" width="470" height="470"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

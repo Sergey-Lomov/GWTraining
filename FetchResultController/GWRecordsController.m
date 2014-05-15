@@ -22,6 +22,9 @@
 @property (nonatomic, strong) NSArray *groupingTitles;
 @property (nonatomic, strong) NSDictionary *groupingValues;
 
+@property (nonatomic, strong) UIActionSheet *photoUpdateActionSheet;
+@property (nonatomic, strong) NSIndexPath *editingPhotoCellPath;
+
 @end
 
 @implementation GWRecordsController
@@ -56,7 +59,11 @@
     self.recordsFetchedResultsController = nil;
     self.addRecordButton = nil;
     self.editRecordsButton = nil;
+    self.groupingSettingActionSheet.delegate = nil;
     self.groupingSettingActionSheet = nil;
+    self.photoUpdateActionSheet.delegate = nil;
+    self.photoUpdateActionSheet = nil;
+    self.editingPhotoCellPath = nil;
 }
 
 #pragma mark - UITableViewController methods
@@ -89,10 +96,8 @@
 - (void)configureCell:(GWRecordTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     Record *record = [self.recordsFetchedResultsController objectAtIndexPath:indexPath];
+    
     cell.titleTextField.text = record.title;
-    
-    cell.detailsLabel.text = [NSString stringWithFormat:@"%d", record.childs.count];
-    
     if (indexPath.row < [[self.recordsFetchedResultsController.sections objectAtIndex:0] numberOfObjects] - 1)
     {
         cell.titleTextField.returnKeyType = UIReturnKeyNext;
@@ -102,9 +107,23 @@
         cell.titleTextField.returnKeyType = UIReturnKeyDone;
     }
     
+    cell.detailsLabel.text = [NSString stringWithFormat:@"%d", record.childs.count];
+    
     NSDateFormatter *dateFromater = [NSDateFormatter new];
     [dateFromater setDateFormat:@"YY-MM-dd hh:mm:ss"];
     cell.dateLabel.text = [dateFromater stringFromDate:record.creationDate];
+    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                           action:@selector(showPhotoUpdateActionShhet:)];
+    [cell.photoImage addGestureRecognizer:tapGestureRecognizer];
+    if (record.photo == nil)
+    {
+        cell.photoImage.image = [UIImage imageNamed:@"photo_placeholder.png"];
+    }
+    else
+    {
+        cell.photoImage.image = [UIImage imageWithData:record.photo];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -178,8 +197,8 @@
     }
 }
 
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
     [self.tableView endUpdates];
 }
 
@@ -187,7 +206,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    UITableViewCell *cell = [self cellForTitleTextField:textField];
+    UITableViewCell *cell = [self cellForSubview:textField];
     if (cell != nil)
     {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
@@ -209,7 +228,7 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    UITableViewCell *cell = [self cellForTitleTextField:textField];
+    UITableViewCell *cell = [self cellForSubview:textField];
     if (cell != nil)
     {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
@@ -220,7 +239,7 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    UITableViewCell *cell = [self cellForTitleTextField:textField];
+    UITableViewCell *cell = [self cellForSubview:textField];
     if (cell != nil)
     {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
@@ -279,40 +298,15 @@
 
 - (IBAction)showGroupingPicker:(id)sender
 {
-    if (self.groupingSettingActionSheet == nil)
-    {
-        self.groupingSettingActionSheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                                      delegate:nil
-                                                             cancelButtonTitle:nil
-                                                        destructiveButtonTitle:nil
-                                                             otherButtonTitles:nil];
-        self.groupingSettingActionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
-        
-        UISegmentedControl * cancelButton = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObject:NSLocalizedString(@"Cancel", @"")]];
-        cancelButton.momentary = YES;
-        cancelButton.frame = CGRectMake(self.view.bounds.size.width - 90.0, 7.0f, 80.0f, 30.0f);
-        cancelButton.tintColor = [UIColor blackColor];
-        [cancelButton addTarget:self action:@selector(declineGrouping) forControlEvents:UIControlEventValueChanged];
-        [self.groupingSettingActionSheet addSubview:cancelButton];
-        
-        UISegmentedControl *okButton = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObject:NSLocalizedString(@"OK", @"")]];
-        okButton.momentary = YES;
-        okButton.frame = CGRectMake(10, 7.0f, 50.0f, 30.0f);
-        okButton.tintColor = [UIColor blackColor];
-        [okButton addTarget:self action:@selector(acceptGrouping) forControlEvents:UIControlEventValueChanged];
-        [self.groupingSettingActionSheet addSubview:okButton];
-        
-        
-        UIPickerView *groupingPicker = [[UIPickerView alloc] init];
-        groupingPicker .frame = CGRectMake(0, 40, self.view.bounds.size.width, 216);
-        groupingPicker .dataSource = self;
-        groupingPicker .delegate = self;
-        groupingPicker .showsSelectionIndicator = YES;
-        [self.groupingSettingActionSheet addSubview:groupingPicker ];
-    }
-    
     [self.groupingSettingActionSheet showInView:self.view.superview];
     [self.groupingSettingActionSheet setBounds:CGRectMake(0, 0, self.view.bounds.size.width, 485)];
+}
+
+- (void)showPhotoUpdateActionShhet:(UITapGestureRecognizer *)recognizer
+{
+    GWRecordTableViewCell *cell = [self cellForSubview:recognizer.view];
+    self.editingPhotoCellPath = [self.tableView indexPathForCell:cell];
+    [self.photoUpdateActionSheet showInView:self.view.superview];
 }
 
 - (void)acceptGrouping
@@ -328,6 +322,112 @@
     [self.groupingSettingActionSheet dismissWithClickedButtonIndex:0 animated:YES];
 }
 
+#pragma mark - UIActionSheetDeleagte and other related methods
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if ([actionSheet isEqual:self.photoUpdateActionSheet])
+    {
+        UIImagePickerController *imagePickerController = [UIImagePickerController new];
+        imagePickerController.delegate = self;
+        
+        switch (buttonIndex)
+        {
+            case 0:
+                if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+                {
+                    [imagePickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
+                    [self presentViewController:imagePickerController animated:YES completion:nil];
+                }
+                break;
+            case 1:
+                if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+                {
+                    [imagePickerController setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+                    [self presentViewController:imagePickerController animated:YES completion:nil];
+                }
+            default:
+                break;
+        }
+    }
+}
+
+- (UIActionSheet *)groupingSettingActionSheet
+{
+    if (_groupingSettingActionSheet != nil)
+    {
+        return _groupingSettingActionSheet;
+    }
+    
+    _groupingSettingActionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                              delegate:nil
+                                                     cancelButtonTitle:nil
+                                                destructiveButtonTitle:nil
+                                                     otherButtonTitles:nil];
+    _groupingSettingActionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+    
+    UISegmentedControl * cancelButton = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObject:NSLocalizedString(@"Cancel", @"")]];
+    cancelButton.momentary = YES;
+    cancelButton.frame = CGRectMake(self.view.bounds.size.width - 90.0, 7.0f, 80.0f, 30.0f);
+    cancelButton.tintColor = [UIColor blackColor];
+    [cancelButton addTarget:self action:@selector(declineGrouping) forControlEvents:UIControlEventValueChanged];
+    [_groupingSettingActionSheet addSubview:cancelButton];
+    
+    UISegmentedControl *okButton = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObject:NSLocalizedString(@"OK", @"")]];
+    okButton.momentary = YES;
+    okButton.frame = CGRectMake(10, 7.0f, 50.0f, 30.0f);
+    okButton.tintColor = [UIColor blackColor];
+    [okButton addTarget:self action:@selector(acceptGrouping) forControlEvents:UIControlEventValueChanged];
+    [_groupingSettingActionSheet addSubview:okButton];
+    
+    
+    UIPickerView *groupingPicker = [[UIPickerView alloc] init];
+    groupingPicker .frame = CGRectMake(0, 40, self.view.bounds.size.width, 216);
+    groupingPicker .dataSource = self;
+    groupingPicker .delegate = self;
+    groupingPicker .showsSelectionIndicator = YES;
+    [_groupingSettingActionSheet addSubview:groupingPicker];
+    
+    return _groupingSettingActionSheet;
+}
+
+- (UIActionSheet *)photoUpdateActionSheet
+{
+    if (_photoUpdateActionSheet != nil)
+    {
+        return _photoUpdateActionSheet;
+    }
+    
+    _photoUpdateActionSheet = [[UIActionSheet alloc] initWithTitle:@""
+                                                          delegate:self
+                                                 cancelButtonTitle:@"Cancel"
+                                            destructiveButtonTitle:nil
+                                                 otherButtonTitles:@"Take a photo", @"Select in galery", nil];
+    
+    return _photoUpdateActionSheet;
+}
+
+#pragma mark - UIImagePickerControllerDelegate protocol methods
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage *pickedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    GWRecordTableViewCell *cell = (GWRecordTableViewCell *)[self.tableView cellForRowAtIndexPath:self.editingPhotoCellPath];
+    [cell.photoImage setImage:pickedImage];
+    
+    Record *record = [self.recordsFetchedResultsController objectAtIndexPath:self.editingPhotoCellPath];
+    record.photo = UIImagePNGRepresentation(pickedImage);
+    
+    self.editingPhotoCellPath = nil;
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    self.editingPhotoCellPath = nil;
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 #pragma mark - UIAlertView methods
 
@@ -381,9 +481,9 @@
     }
 }
 
-- (GWRecordTableViewCell *)cellForTitleTextField:(UITextField *)textField
+- (GWRecordTableViewCell *)cellForSubview:(UIView *)subview
 {
-    UIView *currentView = textField;
+    UIView *currentView = subview;
     while (currentView != nil
            && ![currentView isKindOfClass:[GWRecordTableViewCell class]])
     {

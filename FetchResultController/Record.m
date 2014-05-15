@@ -2,7 +2,7 @@
 //  Record.m
 //  FetchResultController
 //
-//  Created by Sergii Lomov on 12/05/14.
+//  Created by Sergii Lomov on 15/05/14.
 //
 //
 
@@ -12,8 +12,9 @@
 
 @implementation Record
 
-@dynamic title;
 @dynamic creationDate;
+@dynamic title;
+@dynamic photo;
 @dynamic childs;
 
 @end

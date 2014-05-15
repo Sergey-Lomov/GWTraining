@@ -10,7 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "GWRecordTableViewCell.h"
 
-@interface GWRecordsController : UITableViewController <NSFetchedResultsControllerDelegate, UIAlertViewDelegate, UITextFieldDelegate, UIActionSheetDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
+@interface GWRecordsController : UITableViewController <NSFetchedResultsControllerDelegate, UIAlertViewDelegate, UITextFieldDelegate, UIActionSheetDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *editRecordsButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *addRecordButton;
@@ -19,6 +19,8 @@
 - (IBAction)addNewRecord:(id)sender;
 - (IBAction)editRecords:(id)sender;
 - (IBAction)showGroupingPicker:(id)sender;
+
+- (void)startPhotoUpdate:(UITapGestureRecognizer *)recognizer;
 
 
 - (void)reloadData;
