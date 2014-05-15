@@ -10,10 +10,11 @@
 
 @interface NSManagedObject (ActiveRecord)
 
-+ (NSManagedObject *)createInContext:(NSManagedObjectContext *)context;
++ (instancetype)createInContext:(NSManagedObjectContext *)context;
 + (NSFetchedResultsController *)fetchedControllerSortBy:(NSString *)sortBy
                                               ascending:(BOOL)ascending
-                                                grouped:(NSString *)groupedBy
+                                                grouped:(NSString *)grouped
+                                              predicate:(NSPredicate *)predicate
                                               inContext:(NSManagedObjectContext *)context;
 
 - (void)deleteSelf;

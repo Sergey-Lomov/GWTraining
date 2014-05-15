@@ -27,11 +27,12 @@
     NSManagedObjectContext *managedObjectContext = ((GWAppDelegate *)[UIApplication sharedApplication].delegate).managedObjectContext;
     self.fetchedResultsController = [SubRecord fetchedControllerSortBy:@"creationDate"
                                                              ascending:NO
-                                                               grouped:@"sectionTitle"
+                                                               grouped:nil
+                                                             predicate:[NSPredicate predicateWithFormat:@"parent = %@", self.record]
                                                              inContext:managedObjectContext];
     self.fetchedResultsController.delegate = self;
     
-    NSError *error;
+    NSError *error = nil;
     if (![[self fetchedResultsController] performFetch:&error]) {
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
@@ -56,6 +57,11 @@
 }
 
 #pragma mark - UITableViewController methods
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return [[self.fetchedResultsController sections] count];
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     

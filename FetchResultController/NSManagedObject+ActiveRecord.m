@@ -10,7 +10,7 @@
 
 @implementation NSManagedObject (ActiveRecord)
 
-+ (NSManagedObject *)createInContext:(NSManagedObjectContext *)context
++ (instancetype)createInContext:(NSManagedObjectContext *)context
 {
     return [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([self class])
                                          inManagedObjectContext:context];
@@ -19,6 +19,7 @@
 + (NSFetchedResultsController *)fetchedControllerSortBy:(NSString *)sortBy
                                               ascending:(BOOL)ascending
                                                 grouped:(NSString *)groupedBy
+                                              predicate:(NSPredicate *)predicate
                                               inContext:(NSManagedObjectContext *)context
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -29,6 +30,8 @@
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortBy ascending:ascending];
     NSArray *sortDescriptors = @[sortDescriptor];
     [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    [fetchRequest setPredicate:predicate];
     
     NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                                                                                managedObjectContext:context

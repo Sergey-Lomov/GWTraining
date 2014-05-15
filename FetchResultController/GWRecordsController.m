@@ -34,6 +34,7 @@
     self.recordsFetchedResultsController = [Record fetchedControllerSortBy:@"creationDate"
                                                                  ascending:NO
                                                                    grouped:@"sectionTitle"
+                                                                 predicate:nil
                                                                  inContext:managedObjectContext];
     self.recordsFetchedResultsController.delegate = self;
     
@@ -335,7 +336,7 @@
     if (buttonIndex == 1)
     {
         NSManagedObjectContext *context = ((GWAppDelegate *)[UIApplication sharedApplication].delegate).managedObjectContext;
-        Record *record = (Record *)[Record createInContext:context];
+        Record *record = [Record createInContext:context];
         record.title = [alertView textFieldAtIndex:0].text;
         record.creationDate = [NSDate date];
     }
