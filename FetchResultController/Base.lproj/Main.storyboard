@@ -37,14 +37,14 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Creation date: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="On5-ZI-TbZ">
-                                            <rect key="frame" x="69" y="41" width="101" height="21"/>
+                                            <rect key="frame" x="69" y="39" width="101" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NIJ-Xu-Iz5">
-                                            <rect key="frame" x="168" y="41" width="78" height="21"/>
+                                            <rect key="frame" x="168" y="39" width="78" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -62,7 +62,7 @@
                                 <connections>
                                     <outlet property="dateLabel" destination="NIJ-Xu-Iz5" id="54C-pV-mTt"/>
                                     <outlet property="detailsLabel" destination="OKy-S8-5cC" id="r7r-3K-mJ4"/>
-                                    <outlet property="photoImage" destination="scb-kT-8kW" id="yaR-eR-vGc"/>
+                                    <outlet property="photoImageView" destination="scb-kT-8kW" id="nj9-tm-fvQ"/>
                                     <outlet property="titleTextField" destination="ezw-BP-Tg0" id="wc4-zV-319"/>
                                     <segue destination="B1f-fu-j8g" kind="push" identifier="subRecordsSeque" id="KgE-h4-qDf"/>
                                 </connections>
@@ -118,7 +118,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IPZ-gt-FYo">
-                                            <rect key="frame" x="20" y="7" width="280" height="30"/>
+                                            <rect key="frame" x="69" y="7" width="231" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -127,23 +127,28 @@
                                             </connections>
                                         </textField>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ruk-GV-B2L">
-                                            <rect key="frame" x="115" y="38" width="185" height="21"/>
+                                            <rect key="frame" x="169" y="39" width="103" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Creation date:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fLh-zH-gu1">
-                                            <rect key="frame" x="20" y="38" width="92" height="21"/>
+                                            <rect key="frame" x="69" y="39" width="92" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="photo_placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="Fg0-ZF-aOB">
+                                            <rect key="frame" x="9" y="7" width="47" height="47"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="detailsLabel" destination="ruk-GV-B2L" id="ykl-b7-Fe4"/>
+                                    <outlet property="photoImageView" destination="Fg0-ZF-aOB" id="OxH-Ye-oOF"/>
                                     <outlet property="titleTextField" destination="IPZ-gt-FYo" id="pNu-WF-Jaw"/>
                                 </connections>
                             </tableViewCell>

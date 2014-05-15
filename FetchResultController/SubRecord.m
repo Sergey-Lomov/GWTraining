@@ -16,4 +16,6 @@
 @dynamic title;
 @dynamic parent;
 
+@synthesize temporayImage;
+
 @end

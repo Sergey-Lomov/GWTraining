@@ -115,14 +115,14 @@
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                            action:@selector(showPhotoUpdateActionShhet:)];
-    [cell.photoImage addGestureRecognizer:tapGestureRecognizer];
+    [cell.photoImageView addGestureRecognizer:tapGestureRecognizer];
     if (record.photo == nil)
     {
-        cell.photoImage.image = [UIImage imageNamed:@"photo_placeholder.png"];
+        cell.photoImageView.image = [UIImage imageNamed:@"photo_placeholder.png"];
     }
     else
     {
-        cell.photoImage.image = [UIImage imageWithContentsOfFile:record.photo];
+        cell.photoImageView.image = [UIImage imageWithContentsOfFile:record.photo];
     }
 }
 
@@ -413,7 +413,7 @@
 {
     UIImage *pickedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     GWRecordTableViewCell *cell = (GWRecordTableViewCell *)[self.tableView cellForRowAtIndexPath:self.editingPhotoCellPath];
-    [cell.photoImage setImage:pickedImage];
+    [cell.photoImageView setImage:pickedImage];
     
     Record *record = [self.recordsFetchedResultsController objectAtIndexPath:self.editingPhotoCellPath];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

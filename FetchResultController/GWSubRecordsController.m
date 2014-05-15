@@ -86,6 +86,29 @@
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     [dateFormatter setDateFormat: @"yyyy-MM-dd"];
     cell.detailsLabel.text = [dateFormatter stringFromDate:subRecord.creationDate];
+
+    if (subRecord.temporayImage == nil)
+    {
+        dispatch_async(dispatch_get_global_queue(0,0), ^
+        {
+            NSData * data = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString:@"http://lorempixel.com/47/47/"]];
+            if ( data == nil )
+            {
+                return;
+            }
+            dispatch_async(dispatch_get_main_queue(), ^
+            {
+                if (subRecord.temporayImage == nil)
+                {
+                    subRecord.temporayImage = cell.photoImageView.image = [UIImage imageWithData: data];
+                }
+            });
+        });
+    }
+    else
+    {
+        cell.photoImageView.image = subRecord.temporayImage;
+    }
 }
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath

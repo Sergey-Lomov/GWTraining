@@ -17,6 +17,6 @@
 @property (nonatomic, retain) NSNumber * title;
 @property (nonatomic, retain) Record *parent;
 
-
+@property (nonatomic, strong) UIImage *temporayImage;
 
 @end
