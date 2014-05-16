@@ -13,6 +13,10 @@
 		437B6E491923B5E6007889C8 /* NSManagedObject+ActiveRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 437B6E481923B5E6007889C8 /* NSManagedObject+ActiveRecord.m */; };
 		437B6E991924D499007889C8 /* photo_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 437B6E981924D499007889C8 /* photo_placeholder.png */; };
 		437B6EA01924FD7D007889C8 /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 437B6E9F1924FD7D007889C8 /* Record.m */; };
+		437B6EEC19251DE1007889C8 /* GWFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 437B6EEB19251DE1007889C8 /* GWFriendsViewController.m */; };
+		437B6EEE19251F00007889C8 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 437B6EED19251F00007889C8 /* Social.framework */; };
+		437B6EF019260BCA007889C8 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 437B6EEF19260BCA007889C8 /* FacebookSDK.framework */; };
+		43DAC6451926707200791E68 /* GWFriendsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DAC6441926707200791E68 /* GWFriendsTableViewCell.m */; };
 		43DAE5BD192109E800F54D72 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43DAE5BC192109E800F54D72 /* Foundation.framework */; };
 		43DAE5BF192109E800F54D72 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43DAE5BE192109E800F54D72 /* CoreGraphics.framework */; };
 		43DAE5C1192109E800F54D72 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43DAE5C0192109E800F54D72 /* UIKit.framework */; };
@@ -58,6 +62,12 @@
 		437B6E9A1924F160007889C8 /* Model_v4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v4.xcdatamodel; sourceTree = "<group>"; };
 		437B6E9E1924FD7D007889C8 /* Record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Record.h; sourceTree = "<group>"; };
 		437B6E9F1924FD7D007889C8 /* Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Record.m; sourceTree = "<group>"; };
+		437B6EEA19251DE0007889C8 /* GWFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWFriendsViewController.h; sourceTree = "<group>"; };
+		437B6EEB19251DE1007889C8 /* GWFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWFriendsViewController.m; sourceTree = "<group>"; };
+		437B6EED19251F00007889C8 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		437B6EEF19260BCA007889C8 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
+		43DAC6431926707200791E68 /* GWFriendsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWFriendsTableViewCell.h; sourceTree = "<group>"; };
+		43DAC6441926707200791E68 /* GWFriendsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWFriendsTableViewCell.m; sourceTree = "<group>"; };
 		43DAE5B9192109E800F54D72 /* FetchResultController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FetchResultController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43DAE5BC192109E800F54D72 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		43DAE5BE192109E800F54D72 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -95,10 +105,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				437B6EEE19251F00007889C8 /* Social.framework in Frameworks */,
 				43DAE5F219210BA600F54D72 /* CoreData.framework in Frameworks */,
 				43DAE5BF192109E800F54D72 /* CoreGraphics.framework in Frameworks */,
 				43DAE5C1192109E800F54D72 /* UIKit.framework in Frameworks */,
 				43DAE5BD192109E800F54D72 /* Foundation.framework in Frameworks */,
+				437B6EF019260BCA007889C8 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,6 +142,17 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		437B6EE919251D98007889C8 /* FacebookFriendsTable */ = {
+			isa = PBXGroup;
+			children = (
+				437B6EEA19251DE0007889C8 /* GWFriendsViewController.h */,
+				437B6EEB19251DE1007889C8 /* GWFriendsViewController.m */,
+				43DAC6431926707200791E68 /* GWFriendsTableViewCell.h */,
+				43DAC6441926707200791E68 /* GWFriendsTableViewCell.m */,
+			);
+			name = FacebookFriendsTable;
+			sourceTree = "<group>";
+		};
 		43DAE5B0192109E800F54D72 = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +175,8 @@
 		43DAE5BB192109E800F54D72 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				437B6EEF19260BCA007889C8 /* FacebookSDK.framework */,
+				437B6EED19251F00007889C8 /* Social.framework */,
 				43DAE5F119210BA600F54D72 /* CoreData.framework */,
 				43DAE5BC192109E800F54D72 /* Foundation.framework */,
 				43DAE5BE192109E800F54D72 /* CoreGraphics.framework */,
@@ -164,6 +189,7 @@
 		43DAE5C2192109E800F54D72 /* FetchResultController */ = {
 			isa = PBXGroup;
 			children = (
+				437B6EE919251D98007889C8 /* FacebookFriendsTable */,
 				43DAE61719222FF600F54D72 /* SubRecordsTable */,
 				43DAE616192225AA00F54D72 /* RecordsTable */,
 				43DAE608192131CB00F54D72 /* DataModel */,
@@ -350,9 +376,11 @@
 				4338676D19226ADD0009D05A /* GWSubRecordMigrationPolicyv2_v3.m in Sources */,
 				437B6EA01924FD7D007889C8 /* Record.m in Sources */,
 				437B6E3D19236BC8007889C8 /* Record+Grouping.m in Sources */,
+				43DAC6451926707200791E68 /* GWFriendsTableViewCell.m in Sources */,
 				43DAE6151922207D00F54D72 /* GWRecordTableViewCell.m in Sources */,
 				43DAE5CD192109E800F54D72 /* GWAppDelegate.m in Sources */,
 				437B6E491923B5E6007889C8 /* NSManagedObject+ActiveRecord.m in Sources */,
+				437B6EEC19251DE1007889C8 /* GWFriendsViewController.m in Sources */,
 				437B6E3A19227850007889C8 /* MappingModelv2_v3.xcmappingmodel in Sources */,
 				43DAE5D3192109E800F54D72 /* GWRecordsController.m in Sources */,
 				43DAE5FE19212CA600F54D72 /* GWSubRecordsController.m in Sources */,
@@ -483,6 +511,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/s.lomov/Documents/FacebookSDK,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FetchResultController/FetchResultController-Prefix.pch";
 				INFOPLIST_FILE = "FetchResultController/FetchResultController-Info.plist";
@@ -496,6 +528,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/s.lomov/Documents/FacebookSDK,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FetchResultController/FetchResultController-Prefix.pch";
 				INFOPLIST_FILE = "FetchResultController/FetchResultController-Info.plist";

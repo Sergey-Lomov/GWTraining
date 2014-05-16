@@ -7,6 +7,7 @@
 //
 
 #import <CoreData/CoreData.h>
+#import <FacebookSDK/FacebookSDK.h>
 #import "GWAppDelegate.h"
 #import "GWRecordsController.h"
 
@@ -21,6 +22,30 @@
 
 @synthesize managedObjectModel=_managedObjectModel, managedObjectContext=_managedObjectContext, persistentStoreCoordinator=_persistentStoreCoordinator;
 
+-(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    [FBProfilePictureView class];
+    [FBFriendPickerViewController class];
+    
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+
+    self.session = [[FBSession alloc] init];
+    BOOL success = [FBAppCall handleOpenURL:url
+                          sourceApplication:sourceApplication
+                                withSession:self.session];
+    if (success)
+    {
+        [FBSession setActiveSession:self.session];
+    }
+    
+    return success;
+}
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
@@ -104,7 +129,20 @@
     return _persistentStoreCoordinator;
 }
 
-#pragma mark - Application's documents directory
+#pragma mark - FaceBook methods
+
+//- (BOOL)application:(UIApplication *)application
+//            openURL:(NSURL *)url
+//  sourceApplication:(NSString *)sourceApplication
+//         annotation:(id)annotation {
+//    
+//   // NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+//    
+//    return [FBSession.activeSession handleOpenURL:url];
+//}
+
+
+#pragma mark - Other
 
 - (NSURL *)applicationDocumentsDirectory
 {
